@@ -24,17 +24,20 @@ We extend our heartfelt thanks to [Hooray Heroes](https://hoorayheroes.com/stori
 
 1. **Clone the Repository**
    - Clone the project repository to your local machine using Git.
-   ```bash
-   git clone [https://github.com/your-username/funny-stories.git](https://github.com/Mabouelenien/funny-stories.git)
-   cd funny-stories
-    ```
+```
+git clone https://github.com/Mabouelenien/funny-stories.git
+
+cd funny-stories
+ ```
+
 2. **Run the Application**
 Start the web server to run the application.
  ```
 python .\server.py
  ```
 **Usage**
-Once the server is running, open your web browser and navigate to [http://localhost:5000](http://192.168.56.1:8000) to view the “Funny Stories” website.
+Once the server is running, open your web browser and navigate to [http://192.168.56.1:8000
+](http://192.168.56.1:8000) to view the “Funny Stories” website.
 
 
 **Shutting Down**
