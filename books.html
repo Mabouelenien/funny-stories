@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Funny Stories</title>
+
+        <!-- Custom styles -->
+        <link href="/css/style.css" rel="stylesheet">
+
+        <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+
+    </head>
+    <body>
+        <main>
+            <div class="container-fluid p-0 banner-1 banner-2">
+                <div class="banner-1-avatars">
+                   <h2 class="headline">Best funny story books for kiddos!</h2>
+                    <p class="description secondary-c">Find heartwarming Christmas gifts for your kids. </p>
+                      <div class="characters">
+
+                      </div>
+                    <div id="cat_title" class="headline-2 primary-c"></div>
+                </div>
+            </div>
+
+            <header class="">
+            <div class="top-nav">
+                    <div class="menu">
+                       <ul class="menu-1">
+                            <li> <a href="/"><img class="home-icon" src="img/home-icon.jpg" alt="home"></a></li>
+                            <li id="menu-for-christmas"> <a href="books.html?cat=for-christmas">For Christmas</a></li>
+                            <li id="menu-for-one-kiddo"> <a href="books.html?cat=for-one-kiddo">For One Kiddo</a></li>
+                            <li id="menu-for-multiple-kids"> <a href="books.html?cat=for-multiple-kids">For Multiple Kids</a></li>
+                            <li id="menu-for-dad"> <a href="books.html?cat=for-dad">For Dad</a></li>
+                            <li id="menu-for-mom"> <a href="books.html?cat=for-mom">For Mom</a></li>
+                            <li id="menu-for-grandparents"> <a href="books.html?cat=for-grandparents">For Grandparents</a></li>
+                            <li id="menu-for-families"> <a href="books.html?cat=for-families">For Families</a></li>
+                            <li id="menu-for-pets"> <a href="books.html?cat=for-pets">For Pets</a></li>
+                       </ul>
+                    </div>
+                <div class="admin"> <a href="admin.html">Admin</a> </div>
+                </div>
+        </header>
+
+            <div class="container pt-50 pb-50">
+                <div class="row" id="book_list">
+
+                </div>
+
+            </div>
+
+        </main>
+
+        <footer class="container-fluid footer">
+            <div class="">
+                <div class="menu">
+                       <ul class="menu-1">
+                          <li> <a href="books.html?cat=for-christmas">For Christmas</a></li>
+                            <li> <a href="books.html?cat=for-one-kiddo">For One Kiddo</a></li>
+                            <li> <a href="books.html?cat=for-multiple-kids">For Multiple Kids</a></li>
+                            <li> <a href="books.html?cat=for-dad">For Dad</a></li>
+                            <li> <a href="books.html?cat=for-mom">For Mom</a></li>
+                            <li> <a href="books.html?cat=for-grandparents">For Grandparents</a></li>
+                            <li> <a href="books.html?cat=for-families">For Families</a></li>
+                            <li> <a href="books.html?cat=for-pets">For Pets</a></li>
+                       </ul>
+                    </div>
+            </div>
+        </footer>
+
+        <script>
+            
+            document.addEventListener("DOMContentLoaded", () => {
+                // DOM has loaded
+               getAllBooks();
+              });
+ 
+            function getAllBooks(){
+                const params = new URLSearchParams(window.location.search);
+                const cat_name = params.get('cat');
+                const xhr = new XMLHttpRequest();
+                xhr.open("GET", "/books?cat_name=" + cat_name);
+                xhr.send();
+                xhr.responseType = "json";
+                xhr.onload = () => {
+                  if (xhr.readyState == 4 && xhr.status == 200) {
+                      const categoryData = xhr.response['cat'];
+                      document.getElementById("cat_title").innerHTML = categoryData[2];
+                      document.getElementById("menu-" + categoryData[1]).classList.add("active");
+                    const allBooksData = xhr.response['all_books'];
+                    const booksDiv = document.getElementById("book_list");
+                    booksDiv.innerHTML = '';
+                    for(const b in allBooksData) {
+                        let book = allBooksData[b];
+                        let book_name = book[1];
+                        let title = book[2];
+                        let description = book[3];
+                        let img = book[4];
+
+                        // use template strings (backticks). It will also allow you to insert dynamic content via ${...}:
+                        booksDiv.innerHTML += `
+                    <div class="col-lg-3 col-md-3 col-sm-6 p-5">
+                      <div class="card small list details">
+                        <a href="book-download.html?book=${book_name}">
+                            <div class="book-cover">
+                                <img src="/img/books/${img}" class="" alt="${title}" />
+                            </div>
+                            <div class="book-details">
+                               <h1>${title}</h1>
+                               <div class="read-more-container">
+                                  <p>${description} </p>
+                               </div>
+                            </div>
+                        </a>
+                      </div>
+                    </div>
+                    `;
+                     }
+                        
+                  } else {
+                    console.log(`Error: ${xhr.status}`);
+                  }
+                };
+            }
+            
+            
+        </script>
+    </body>
+</html>

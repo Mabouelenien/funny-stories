@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Funny Stories</title>
+
+        <!-- Custom styles -->
+        <link href="/css/style.css" rel="stylesheet">
+
+        <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+
+    </head>
+    <body>
+        <main>
+            <section class="container-fluid p-0 banner-1">
+                <div class="banner-1-avatars">
+                   <h2 class="headline primary-c">Best funny story books for kiddos!</h2>
+                    <p class="description secondary-c">Find heartwarming Christmas gifts for your kids. </p>
+                      <div class="characters">
+
+                           <div>
+                               <div class="character-page-images">
+                                  <div class="images">
+                                     <div>
+                                        <img src="img/girl-avatar.png" alt="girl" width="230" height="304">
+                                     </div>
+                                  </div>
+                                </div>
+                           </div>
+                           <div>
+                               <div class="character-page-images">
+                                  <div class="images">
+                                     <div>
+                                        <img src="img/boy-avatar.png" alt="boy" width="230" height="304">
+                                     </div>
+                                  </div>
+                               </div>
+                           </div>
+                      </div>
+                    <div class="extra third-c"><span>One-of-a-Kind Holiday Treasures</span></div>
+                </div>
+            </section>
+
+            <header class="">
+            <div class="top-nav">
+                    <div class="menu">
+                       <ul class="menu-1">
+                            <li> <a href="/"><img class="home-icon" src="img/home-icon.jpg" alt="home"></a></li>
+                            <li> <a href="books.html?cat=for-christmas">For Christmas</a></li>
+                            <li> <a href="books.html?cat=for-one-kiddo">For One Kiddo</a></li>
+                            <li> <a href="books.html?cat=for-multiple-kids">For Multiple Kids</a></li>
+                            <li> <a href="books.html?cat=for-dad">For Dad</a></li>
+                            <li> <a href="books.html?cat=for-mom">For Mom</a></li>
+                            <li> <a href="books.html?cat=for-grandparents">For Grandparents</a></li>
+                            <li> <a href="books.html?cat=for-families">For Families</a></li>
+                            <li> <a href="books.html?cat=for-pets">For Pets</a></li>
+                       </ul>
+                    </div>
+                    <div class="admin"> <a href="admin.html">Admin</a> </div>
+                </div>
+        </header>
+
+            <div class="container pt-50 pb-50">
+
+                <section class="row" id="categories">
+
+                </section>
+
+
+                <section>
+                    <div class="features-section">
+                       <dl class="icons features bunny">
+                          <dt>Download your favorite story</dt>
+                          <dd>heartwarming story gifts for your kids.</dd>
+                       </dl>
+                       <dl class="icons features family">
+                          <dt>From ages 0 – 102</dt>
+                          <dd>Carefully chosen stories are appropriate for children aged  0 - 12. Oops. We mean 102. You can stay a kid by heart your whole life!</dd>
+                       </dl>
+                       <dl class="icons features set-name">
+                          <dt>Each book is unique!</dt>
+                          <dd>With so many personalization options, the chances of creating a book similar to an already existing one are zero to none.</dd>
+                       </dl>
+                       <dl class="icons features thefeelsmovement">
+                          <dt>Over 3 Million Books Sold</dt>
+                          <dd>Our books for kids and their families have been personalized over 3 million times! Some readers laugh, some (most!) cry tears of joy – create yours now and let the emotions begin!</dd>
+                       </dl>
+                       <dl class="icons features rascal">
+                          <dt>Plushies</dt>
+                          <dd>Squishy, cute, and super cuddly, our plushies bring a smile to everyone's faces! Available individually and as add-ons to books.</dd>
+                       </dl>
+                       <dl class="icons features safe">
+                          <dt>Fast and secure</dt>
+                          <dd>Don't worry. Your data is under the protection of our fierce dragon in the land of Hooray Heroes!</dd>
+                       </dl>
+                    </div>
+
+                </section>
+
+
+            </div>
+
+        </main>
+
+        <footer class="container-fluid footer">
+            <div class="">
+                <div class="menu">
+                       <ul class="menu-1">
+                          <li> <a href="books.html?cat=for-christmas">For Christmas</a></li>
+                            <li> <a href="books.html?cat=for-one-kiddo">For One Kiddo</a></li>
+                            <li> <a href="books.html?cat=for-multiple-kids">For Multiple Kids</a></li>
+                            <li> <a href="books.html?cat=for-dad">For Dad</a></li>
+                            <li> <a href="books.html?cat=for-mom">For Mom</a></li>
+                            <li> <a href="books.html?cat=for-grandparents">For Grandparents</a></li>
+                            <li> <a href="books.html?cat=for-families">For Families</a></li>
+                            <li> <a href="books.html?cat=for-pets">For Pets</a></li>
+                       </ul>
+                    </div>
+            </div>
+        </footer>
+
+        <script>
+
+            document.addEventListener("DOMContentLoaded", () => {
+                // DOM has loaded
+               getAllCategories();
+              });
+
+            function getAllCategories(){
+                const xhr = new XMLHttpRequest();
+                xhr.open("GET", "/categories");
+                xhr.send();
+                xhr.responseType = "json";
+                xhr.onload = () => {
+                  if (xhr.readyState == 4 && xhr.status == 200) {
+                    const categoryData = xhr.response;
+                    const categoriesDiv = document.getElementById("categories");
+                    categoriesDiv.innerHTML = '';
+                    for(const c in categoryData) {
+                        const category = categoryData[c];
+                        const url = 'books.html?cat='+category[1]
+                        const title = category[2]
+                        const image = category[3]
+
+                        // use template strings (backticks). It will also allow you to insert dynamic content via ${...}:
+                        categoriesDiv.innerHTML += `<div class="col-lg-3 col-md-3 col-sm-6 p-5">
+                      <div class="card small list">
+                        <a href="${url}">
+                            <p class="product-preview"> ${title} </p>
+                            <div class="book-cover">
+                                <img src="/img/books/${image}" class="" alt="${title}" />
+                            </div>
+                            <div class="book-details">
+                               <h1>${title}</h1>
+                            </div>
+                        </a>
+                      </div>
+                    </div>
+                    `;
+                     }
+
+                  } else {
+                    console.log(`Error: ${xhr.status}`);
+                  }
+                };
+            }
+
+
+        </script>
+    </body>
+</html>
