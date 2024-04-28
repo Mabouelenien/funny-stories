@@ -36,8 +36,8 @@ Start the web server to run the application.
 python .\server.py
  ```
 **Usage**
-Once the server is running, open your web browser and navigate to [http://192.168.56.1:8000
-](http://192.168.56.1:8000) to view the “Funny Stories” website.
+Once the server is running, open your web browser and navigate to [http://localhost:8000
+](http://localhost:8000) to view the “Funny Stories” website.
 
 
 **Shutting Down**
